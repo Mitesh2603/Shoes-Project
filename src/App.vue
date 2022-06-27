@@ -5,7 +5,7 @@
   <header>
     <img
       alt="Vue logo"
-      class="logo"
+      class="logo mb-5  text-red-100" 
       src="@/assets/logo.svg"
       width="125"
       height="125"
