@@ -1,30 +1,20 @@
 <template>
   <center>
-    <div
-      class="div"
-      v-bind:class="[isActive ? 'red' : 'blue']"
-      @click="toggleClass()"
-    ></div>
-    <div
-      class="div"
-      v-bind:class="[isActive ? 'blue' : 'red']"
-      @click="isActive = !isActive"
-    ></div>
-    <div v-html="msg"></div>
-    <h1>
+    <!-- <div v-html="msg"></div> -->
+    <h1 class="text-red-600 text-2xl">
       {{ msg }}
     </h1>
     <button v-on:click="hello">Start</button><br /><br />
 
-    <form @submit.prevent="hello">Prevent Default</form>
-    <button @click="hello">Start</button>
+    <!-- <form @submit.prevent="hello">Prevent Default</form> -->
+    <button class="text-grey-200 hover:text-grey-600" @click="hello">Start</button>
 
-    Javascript Expressions
+    <!-- Javascript Expressions --> 
     <h1>{{ 56589 + 2565.165 }}</h1>
     <h1>{{ ok ? "YES" : "NO" }}</h1>
-    <h1>
+    <!-- <h1>
       {{ msg.split("").reverse().join(",") }}
-    </h1>
+    </h1> -->
 
     <button @click="mutateDeeply">Count is : {{ obj.nested.count }}</button
     ><br />
@@ -42,33 +32,19 @@ export default {
       },
     };
   },
-  methods: {
-    mutateDeeply() {
-      this.obj.nested.count++;
-      this.obj.arr.push("baz");
-    },
-  },
+  // methods: {
+  //   mutateDeeply() {
+  //     this.obj.nested.count++;
+  //     this.obj.arr.push("baz");
+  //   },
+  // },
   // props: {
   //   msg: String,
   // },
-  // methods: {
-  //   hello() {
-  //     alert("On:Click Button Pressed");
-  //   },
-  // },
+  methods: {
+    hello() {
+      alert("On:Click Button Pressed");
+    },
+  },
 };
 </script>
-
-<style scoped>
-h1 {
-  color: red;
-  font-size: 30px;
-}
-
-button {
-  background-color: lightgrey;
-}
-button:hover {
-  background-color: grey;
-}
-</style>

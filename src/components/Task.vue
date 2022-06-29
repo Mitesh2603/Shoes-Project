@@ -1,9 +1,16 @@
 <template>
-<center>
-  <h1>Toggle Button</h1>
-  <button :class="[isActive ? 'green' : 'red']" @click="toggle">
-    {{ isActive ? "Green" : "Red" }}
-  </button>
+  <link href="/dist/output.css" rel="stylesheet" />
+  <center>
+    <h1 class="text-4xl p-2">Toggle Button</h1>
+    <button
+      :class="[
+        isActive ? 'p-2 bg-green-500' : 'p-2 bg-red-500',
+        'border-solid border-2 border-black p-4 inline-block rounded-2xl',
+      ]"
+      @click="toggle"
+    >
+      {{ isActive ? "Green" : "Red" }}
+    </button>
   </center>
 </template>
 
@@ -21,16 +28,3 @@ export default {
   },
 };
 </script>
-
-<style scoped>
-button {
-  border: 2px solid;
-  border-radius: 5px;
-}
-.green {
-  background-color: green;
-}
-.red {
-  background-color: red;
-}
-</style>
