@@ -9,10 +9,7 @@
         height="125"
       />
     </header>
-  </center>
-  <Task />
-  <!-- <Helloworld /> -->
-  <!-- <hello /> -->
+  </center><Task />
 </template>
 
 <script lang="ts">
