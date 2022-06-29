@@ -1,7 +1,7 @@
 <template>
   <center>
     <a :href="link"> Introduction Of vue </a><br>
-    <!-- Vue Directives (Starts WIrh v-) -->
+    Vue Directives (Starts WIrh v-)
     <h1 v-bind:id="headingId">Introduction Of Vue</h1>
     <br />
 
@@ -36,7 +36,7 @@
 
     <div v-bind="objectOfAttrs"></div>
 
-    <!-- Conditional Rendering -->
+    Conditional Rendering 
     <h1 v-if="num === 0">Number is Zero</h1>
     <h1 v-else-if="num < 0">Number is Negative</h1>
     <h1 v-else-if="num > 0">Number is Positive</h1>
@@ -72,10 +72,10 @@ export default {
       size: "50px",
       family: "Times New Roman",
 
-        objectOfAttrs: {
-        id: 'container',
-        class: 'wrapper'
-      }
+      //   objectOfAttrs: {
+      //   id: 'container',
+      //   class: 'wrapper'
+      // }
     };
   },
 };

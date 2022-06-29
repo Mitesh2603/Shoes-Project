@@ -10,17 +10,21 @@
       />
     </header>
   </center>
-  <Helloworld /> 
-  <hello msg="I'm Mitesh"/>
+  <Task />
+  <!-- <Helloworld /> -->
+  <!-- <hello /> -->
 </template>
 
 <script lang="ts">
 import Helloworld from "./components/Helloworld.vue";
 import Hello from "./components/Hello.vue";
+import Task from "./components/Task.vue"
 export default {
   components: {
+    Task,
     Hello,
     Helloworld,
+
   },
 };
 </script>
