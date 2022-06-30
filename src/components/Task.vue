@@ -42,6 +42,7 @@
         v-model="gender"
         required
       />
+      
       <label for="male">Male </label>
       <input
         name="gender"
@@ -95,8 +96,6 @@
 </template>
 
 <script lang="ts">
-import { required, email, minLength } from "@vuelidate/validators";
-
 export default {
   data() {
     return {
@@ -110,7 +109,6 @@ export default {
   },
   methods: {
     checkForm: function () {
-      this.errors = [];
       if (!this.validEmail(this.email)) {
         alert("Valid email required.");
       }
@@ -121,9 +119,9 @@ export default {
         alert("Form Submitted Successfully");
       }
     },
-    numberValid: function(number){
+    numberValid: function (number) {
       let num = /^[\+]?[(]?[0-9]{3}[)]?[-\s\.]?[0-9]{3}[-\s\.]?[0-9]{4,6}$/im;
-      return num.test(number)
+      return num.test(number);
     },
     validEmail: function (email) {
       var re =

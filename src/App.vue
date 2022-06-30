@@ -9,7 +9,7 @@
         height="125"
       />
     </header>
-      <div>
+      <!-- <div>
         Parent Component
         <button @click="showChild = !showChild">Toggle Child</button>
       </div>
@@ -49,7 +49,7 @@
       {{ item.title }} {{ item.price }}
     </h2>
 
-    <input type="text" v-model="country" />
+    <input type="text" v-model="country" /> -->
   </center>
   <Task />
   <Hello msg="I'm Mitesh"/>
@@ -60,73 +60,71 @@
 import Helloworld from "./components/Helloworld.vue";
 import Hello from "./components/Hello.vue";
 import Task from "./components/Task.vue";
-import Lifecycle from "./components/Lifecycle.vue";
+// import Lifecycle from "./components/Lifecycle.vue";
 export default {
   components: {
     Task,
     Hello,
     Helloworld,
-    Lifecycle,
+    // Lifecycle,
   },
   name: "App",
   data() {
-    return {
-      showChild: true,
-      firstName: "Mitesh",
-      lastName: "Makwana",
-      items: [
-        {
-          id: 1,
-          title: "TV",
-          price: 200,
-        },
-        {
-          id: 2,
-          title: "Fridge",
-          price: 400,
-        },
-        {
-          id: 3,
-          title: "Sofa",
-          price: 600,
-        },
-      ],
-      country: "",
-    };
-  },
-  methods: {
-    totall() {
-      console.log("Method");
-      return this.items.reduce(
-        (total, curr) => (total = total + curr.price),
-        0
-      );
-    },
-    changeFullName() {
-      this.fullName = "Meet Mak";
-    },
-  },
-  computed: {
-    fullName: {
-      get() {
-        return `${this.firstName} ${this.lastName}`;
-      },
-      set(value) {
-        const name = value.split(" ");
-        this.firstName = name[0];
-        this.lastName = name[1];
-      },
-    },
-    total() {
-      console.log("Computed");
-      return this.items.reduce(
-        (total, curr) => (total = total + curr.price),
-        0
-      );
-    },
-    expensiveItems() {
-      return this.items.filter((item) => item.price > 200);
-    },
+  //     showChild: true,
+  //     firstName: "Mitesh",
+  //     lastName: "Makwana",
+  //     items: [
+  //       {
+  //         id: 1,
+  //         title: "TV",
+  //         price: 200,
+  //       },
+  //       {
+  //         id: 2,
+  //         title: "Fridge",
+  //         price: 400,
+  //       },
+  //       {
+  //         id: 3,
+  //         title: "Sofa",
+  //         price: 600,
+  //       },
+  //     ],
+  //     country: "",
+  //   };
+  // },
+  // methods: {
+  //   totall() {
+  //     console.log("Method");
+  //     return this.items.reduce(
+  //       (total, curr) => (total = total + curr.price),
+  //       0
+  //     );
+  //   },
+  //   changeFullName() {
+  //     this.fullName = "Meet Mak";
+  //   },
+  // },
+  // computed: {
+  //   fullName: {
+  //     get() {
+  //       return `${this.firstName} ${this.lastName}`;
+  //     },
+  //     set(value) {
+  //       const name = value.split(" ");
+  //       this.firstName = name[0];
+  //       this.lastName = name[1];
+  //     },
+  //   },
+  //   total() {
+  //     console.log("Computed");
+  //     return this.items.reduce(
+  //       (total, curr) => (total = total + curr.price),
+  //       0
+  //     );
+  //   },
+  //   expensiveItems() {
+  //     return this.items.filter((item) => item.price > 200);
   },
 };
 </script>
