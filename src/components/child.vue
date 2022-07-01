@@ -1,6 +1,6 @@
 <template>
   <center>
-    <h1 class="text-2xl font-serif">{{ message }}</h1><br />
+    <h1 class="text-4xl font-serif">{{ message }}</h1><br />
     <app-input
       class="font-serif"
       :msg="message"

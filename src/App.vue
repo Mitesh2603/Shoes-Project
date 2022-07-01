@@ -51,21 +51,28 @@
 
     <input type="text" v-model="country" /> -->
   </center>
-  <Task />
-  <Hello msg="I'm Mitesh"/>
-  <Helloworld />
+  <Child />
+  <Parent />
+  <!-- <Task /> -->
+  <!-- <Hello msg="I'm Mitesh"/> -->
+  <!-- <Helloworld /> -->
 </template>
 
 <script lang="ts">
 import Helloworld from "./components/Helloworld.vue";
 import Hello from "./components/Hello.vue";
 import Task from "./components/Task.vue";
+import Parent from "./components/parent.vue";
+import Child from "./components/child.vue";
+
 // import Lifecycle from "./components/Lifecycle.vue";
 export default {
   components: {
     Task,
     Hello,
     Helloworld,
+    Parent,
+    Child,
     // Lifecycle,
   },
   name: "App",
