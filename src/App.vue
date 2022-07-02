@@ -12,6 +12,7 @@
   </center>
   <Helloworld /> 
   <hello msg="I'm Mitesh"/>
+
 </template>
 
 <script lang="ts">
