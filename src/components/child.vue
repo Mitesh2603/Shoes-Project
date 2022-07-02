@@ -1,25 +1,26 @@
 <template>
-  <center>
-    <h1 class="text-4xl font-serif">{{ message }}</h1><br />
-    <app-input
-      class="font-serif"
-      :msg="message"
-      @messageChanged="message = $event"
-    ></app-input><br/>
-  </center>
+  <input
+    class="border-solid border-2 border-black font-serif"
+    type="text"
+    :value="msg"
+    @input="changeMessage"
+  />
+  <p>{{ message }}</p>
 </template>
 
 <script>
-import Parent from "./parent.vue";
-
 export default {
+  props: ["msg"],
   data() {
     return {
-      message: "My name is Mitesh!",
+      message: "",
     };
   },
-  components: {
-    "app-input": Parent,
+  methods: {
+    changeMessage(event) {
+      this.message = event.target.value;
+      this.$emit("messageChanged", this.message);
+    },
   },
 };
 </script>

@@ -50,11 +50,11 @@
     </h2>
 
     <input type="text" v-model="country" /> -->
+  <Hello />
   </center>
-  <Child />
-  <Parent />
+  <!-- <Child /> -->
+  <!-- <Parent /> -->
   <!-- <Task /> -->
-  <!-- <Hello msg="I'm Mitesh"/> -->
   <!-- <Helloworld /> -->
 </template>
 

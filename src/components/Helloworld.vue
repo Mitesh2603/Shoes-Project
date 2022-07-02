@@ -1,5 +1,5 @@
 <template>
-  <center>
+
     <span>Message is :</span>
     <p>{{ message }}</p>
     <textarea v-model="message" placeholder="Message"></textarea><br />
@@ -113,7 +113,6 @@
         {{ index }}. {{ key }}: {{ value }}
       </li>
     </ul>
-  </center>
 </template>
 
 <script lang="ts">
