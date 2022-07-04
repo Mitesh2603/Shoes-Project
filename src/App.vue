@@ -9,7 +9,13 @@
         height="125"
       />
     </header>
-      <!-- <div>
+    <!-- <Child name="Mitesh" heroName="Thor"/>
+    <Child name="Meet" heroName="Iron Man"/>
+    <Child name="Mit" heroName="Wanda"/>
+    <Child name="Meetesh" heroName="Captain America"/> -->
+
+    <!-- <child title="Thor: Love and Thunder" :likes="5000" :isReleased="true"/> -->
+    <!-- <div>
         Parent Component
         <button @click="showChild = !showChild">Toggle Child</button>
       </div>
@@ -50,88 +56,130 @@
     </h2>
 
     <input type="text" v-model="country" /> -->
-  <Hello />
+    <!-- <Hello /> -->
+    <!-- <button @click="showPopup = true">Show Popup</button> -->
+    <!-- <Popup id="myPopup" v-if="showPopup" @close="closePopup"/> -->
+
+    <FancyButton>
+      <!-- <template #header>
+        <h1 class="text-3xl">This is header.</h1>
+      </template>
+      <template #default>
+        <p>A paragraph for the main content.</p>
+        <p>And another one.</p>
+      </template>
+      <template #footer>
+        <h1 class="2xl">This is Footer.</h1>
+      </template> -->
+      <template v-slot:default="slotProps">
+        {{ slotProps.firstName }} {{ slotProps.lastName }}
+      </template>
+    </FancyButton>
+    <FancyButton>
+      <template v-slot:default="slotProps">
+        {{ slotProps.lastName }} {{ slotProps.firstName }}
+      </template>
+    </FancyButton>  
+    <FancyButton>
+      <template v-slot:default="slotProps">
+        {{ slotProps.firstName }}
+      </template>
+    </FancyButton>
   </center>
-  <!-- <Child /> -->
-  <!-- <Parent /> -->
+
+  <!-- <Parent />/ -->
   <!-- <Task /> -->
   <!-- <Helloworld /> -->
 </template>
 
 <script lang="ts">
+import FancyButton from "./components/FancyButton.vue";
 import Helloworld from "./components/Helloworld.vue";
 import Hello from "./components/Hello.vue";
 import Task from "./components/Task.vue";
 import Parent from "./components/parent.vue";
 import Child from "./components/child.vue";
+import Popup from "./components/Popup.vue";
 
 // import Lifecycle from "./components/Lifecycle.vue";
 export default {
+  name: "App",
   components: {
     Task,
     Hello,
     Helloworld,
     Parent,
     Child,
+    Popup,
+    FancyButton,
     // Lifecycle,
   },
-  name: "App",
+
   data() {
-  //     showChild: true,
-  //     firstName: "Mitesh",
-  //     lastName: "Makwana",
-  //     items: [
-  //       {
-  //         id: 1,
-  //         title: "TV",
-  //         price: 200,
-  //       },
-  //       {
-  //         id: 2,
-  //         title: "Fridge",
-  //         price: 400,
-  //       },
-  //       {
-  //         id: 3,
-  //         title: "Sofa",
-  //         price: 600,
-  //       },
-  //     ],
-  //     country: "",
-  //   };
-  // },
-  // methods: {
-  //   totall() {
-  //     console.log("Method");
-  //     return this.items.reduce(
-  //       (total, curr) => (total = total + curr.price),
-  //       0
-  //     );
-  //   },
-  //   changeFullName() {
-  //     this.fullName = "Meet Mak";
-  //   },
-  // },
-  // computed: {
-  //   fullName: {
-  //     get() {
-  //       return `${this.firstName} ${this.lastName}`;
-  //     },
-  //     set(value) {
-  //       const name = value.split(" ");
-  //       this.firstName = name[0];
-  //       this.lastName = name[1];
-  //     },
-  //   },
-  //   total() {
-  //     console.log("Computed");
-  //     return this.items.reduce(
-  //       (total, curr) => (total = total + curr.price),
-  //       0
-  //     );
-  //   },
-  //   expensiveItems() {
-  //     return this.items.filter((item) => item.price > 200);
+    return {
+      showPopup: false,
+    };
+    //     showChild: true,
+    //     firstName: "Mitesh",
+    //     lastName: "Makwana",
+    //     items: [
+    //       {
+    //         id: 1,
+    //         title: "TV",
+    //         price: 200,
+    //       },
+    //       {
+    //         id: 2,
+    //         title: "Fridge",
+    //         price: 400,
+    //       },
+    //       {
+    //         id: 3,
+    //         title: "Sofa",
+    //         price: 600,
+    //       },
+    //     ],
+    //     country: "",
+    //   };
+    // },
+    // methods: {
+    //   totall() {
+    //     console.log("Method");
+    //     return this.items.reduce(
+    //       (total, curr) => (total = total + curr.price),
+    //       0
+    //     );
+    //   },
+    //   changeFullName() {
+    //     this.fullName = "Meet Mak";
+    //   },
+    // },
+    // computed: {
+    //   fullName: {
+    //     get() {
+    //       return `${this.firstName} ${this.lastName}`;
+    //     },
+    //     set(value) {
+    //       const name = value.split(" ");
+    //       this.firstName = name[0];
+    //       this.lastName = name[1];
+    //     },
+    //   },
+    //   total() {
+    //     console.log("Computed");
+    //     return this.items.reduce(
+    //       (total, curr) => (total = total + curr.price),
+    //       0
+    //     );
+    //   },
+    //   expensiveItems() {
+    //     return this.items.filter((item) => item.price > 200);
+  },
+  methods: {
+    closePopup(name) {
+      this.showPopup = false;
+      console.log("name", name);
+    },
   },
 };
 </script>
