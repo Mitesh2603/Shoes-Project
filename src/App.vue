@@ -1,4 +1,17 @@
 <template>
+
+  <header>
+    <img
+      alt="Vue logo"
+      class="logo mb-5 text-red-100"
+
+      src="@/assets/logo.svg"
+
+    />
+  </header>
+  <Helloworld msg="Welcome to Vue" />
+  <hello />
+
   <center>
     <header class="p-5">
       <img
@@ -88,8 +101,6 @@
   </center>
   <Helloworld /> 
   <hello msg="I'm Mitesh"/>
-
-
 
   <!-- <Parent />/ -->
   <!-- <Task /> -->
