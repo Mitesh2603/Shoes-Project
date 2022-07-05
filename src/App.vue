@@ -86,10 +86,14 @@
       </template>
     </FancyButton>
   </center>
+  <Helloworld /> 
+  <hello msg="I'm Mitesh"/>
+
+
 
   <!-- <Parent />/ -->
   <!-- <Task /> -->
-  <!-- <Helloworld /> -->
+
 </template>
 
 <script lang="ts">
