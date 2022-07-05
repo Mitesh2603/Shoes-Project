@@ -73,7 +73,7 @@
     <!-- <button @click="showPopup = true">Show Popup</button> -->
     <!-- <Popup id="myPopup" v-if="showPopup" @close="closePopup"/> -->
 
-    <FancyButton>
+    <!-- <FancyButton> -->
       <!-- <template #header>
         <h1 class="text-3xl">This is header.</h1>
       </template>
@@ -84,7 +84,7 @@
       <template #footer>
         <h1 class="2xl">This is Footer.</h1>
       </template> -->
-      <template v-slot:default="slotProps">
+      <!-- <template v-slot:default="slotProps">
         {{ slotProps.firstName }} {{ slotProps.lastName }}
       </template>
     </FancyButton>
@@ -97,7 +97,7 @@
       <template v-slot:default="slotProps">
         {{ slotProps.firstName }}
       </template>
-    </FancyButton>
+    </FancyButton> -->
   </center>
   <Helloworld /> 
   <hello msg="I'm Mitesh"/>
