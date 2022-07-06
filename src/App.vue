@@ -85,6 +85,7 @@
         {{ slotProps.firstName }}
       </template>
     </FancyButton> -->
+    <Router />
   </center>
 
   <!-- <Parent />/ -->
@@ -100,6 +101,7 @@ import Task from "./components/Task.vue";
 import Parent from "./components/parent.vue";
 import Child from "./components/child.vue";
 import Popup from "./components/Popup.vue";
+import Router from "./components/Router.vue";
 
 // import Lifecycle from "./components/Lifecycle.vue";
 export default {
@@ -112,6 +114,7 @@ export default {
     Child,
     Popup,
     FancyButton,
+    Router,
     // Lifecycle,
   },
 
