@@ -61,7 +61,7 @@
     <!-- <Popup id="myPopup" v-if="showPopup" @close="closePopup"/> -->
 
     <!-- <FancyButton> -->
-      <!-- <template #header>
+    <!-- <template #header>
         <h1 class="text-3xl">This is header.</h1>
       </template>
       <template #default>
@@ -71,7 +71,7 @@
       <template #footer>
         <h1 class="2xl">This is Footer.</h1>
       </template> -->
-      <!-- <template v-slot:default="slotProps">
+    <!-- <template v-slot:default="slotProps">
         {{ slotProps.firstName }} {{ slotProps.lastName }}
       </template>
     </FancyButton>
@@ -85,7 +85,14 @@
         {{ slotProps.firstName }}
       </template>
     </FancyButton> -->
-    <Router />
+    <!-- <Router /> -->
+    <!-- <ComponentA />
+    <ComponentB /> -->
+    <!-- <Buttons /> -->
+    <!-- <Buttons settings="Settings" /> -->
+    <!-- <Buttons share="Share" /> -->
+    <!-- <Home /> -->
+    <router-view />
   </center>
 
   <!-- <Parent />/ -->
@@ -94,6 +101,8 @@
 </template>
 
 <script lang="ts">
+import ComponentA from "./components/ComponentA.vue";
+import ComponentB from "./components/ComponentB.vue";
 import FancyButton from "./components/FancyButton.vue";
 import Helloworld from "./components/Helloworld.vue";
 import Hello from "./components/Hello.vue";
@@ -102,6 +111,8 @@ import Parent from "./components/parent.vue";
 import Child from "./components/child.vue";
 import Popup from "./components/Popup.vue";
 import Router from "./components/Router.vue";
+import Buttons from "./components/Buttons/Buttons.vue";
+import Home from "./components/product/Home.vue"
 
 // import Lifecycle from "./components/Lifecycle.vue";
 export default {
@@ -115,7 +126,11 @@ export default {
     Popup,
     FancyButton,
     Router,
+    ComponentA,
+    ComponentB,
     // Lifecycle,
+    Buttons,
+    Home
   },
 
   data() {
@@ -177,12 +192,6 @@ export default {
     //   },
     //   expensiveItems() {
     //     return this.items.filter((item) => item.price > 200);
-  },
-  methods: {
-    closePopup(name) {
-      this.showPopup = false;
-      console.log("name", name);
-    },
   },
 };
 </script>
