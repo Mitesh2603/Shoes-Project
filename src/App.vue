@@ -86,13 +86,13 @@
       </template>
     </FancyButton> -->
     <!-- <Router /> -->
-    <!-- <ComponentA />
-    <ComponentB /> -->
+    <ComponentA /><br />
+    <ComponentB />
     <!-- <Buttons /> -->
     <!-- <Buttons settings="Settings" /> -->
     <!-- <Buttons share="Share" /> -->
     <!-- <Home /> -->
-    <router-view />
+    <!-- <router-view /> -->
   </center>
 
   <!-- <Parent />/ -->
@@ -101,8 +101,8 @@
 </template>
 
 <script lang="ts">
-import ComponentA from "./components/ComponentA.vue";
-import ComponentB from "./components/ComponentB.vue";
+import ComponentA from "./components/CompA.vue";
+import ComponentB from "./components/CompB.vue";
 import FancyButton from "./components/FancyButton.vue";
 import Helloworld from "./components/Helloworld.vue";
 import Hello from "./components/Hello.vue";
@@ -112,7 +112,7 @@ import Child from "./components/child.vue";
 import Popup from "./components/Popup.vue";
 import Router from "./components/Router.vue";
 import Buttons from "./components/Buttons/Buttons.vue";
-import Home from "./components/product/Home.vue"
+import Home from "./components/product/Home.vue";
 
 // import Lifecycle from "./components/Lifecycle.vue";
 export default {
@@ -130,7 +130,7 @@ export default {
     ComponentB,
     // Lifecycle,
     Buttons,
-    Home
+    Home,
   },
 
   data() {
