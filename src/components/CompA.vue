@@ -14,7 +14,7 @@ export default {
   <div>
     <button @click="store.commit('increment')">
       From A Increment 1: {{ store.state.count }}</button
-    ><br />
+    ><br /><br/>
     <button @click="store.commit({ type: 'increments', amount: 5 })">
       From A Increment Amount: {{ store.state.count }}
     </button><br/>
