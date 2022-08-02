@@ -1,5 +1,5 @@
 <template>
-  <h1 class="title">CART</h1>
+  <h1 class="title">Shopping</h1>
   <Cart
     v-for="product in products"
     :id="product.id"

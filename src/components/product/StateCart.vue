@@ -6,17 +6,27 @@
         <div><img :src="image" height="100" /></div>
         <span class="price">{{ " Rs. " + price }}</span>
       </div>
-      <br />
-      <button class="button" @click="addToCart(id)">Add To Cart</button>
+      <button v-if="add" class="addBtn" @click="addToCart(id)">
+        Add To Cart
+      </button>
+      <!-- <button v-if="!remove" class="removeBtn" @click="removeItem(index, item)">
+        Remove Item
+      </button> -->
     </span>
   </div>
 </template>
 
 <script>
 import { store } from "./store.js";
-console.log(store);
+
 export default {
   name: "product",
+  data() {
+    return {
+      add: true,
+      // remove: true,
+    };
+  },
   props: ["id", "name", "image", "price"],
   methods: {
     addToCart(id) {
@@ -28,7 +38,8 @@ export default {
 </script>
 
 <style scoped>
-.button {
+.addBtn,
+.removeBtn {
   background-color: #4caf50;
   border: none;
   color: white;
@@ -40,7 +51,8 @@ export default {
   cursor: pointer;
   transition-duration: 0.4s;
 }
-.button:hover {
+.addBtn:hover,
+.removeBtn:hover {
   box-shadow: 0 12px 16px 0 rgba(0, 0, 0, 0.24),
     0 17px 50px 0 rgba(0, 0, 0, 0.19);
 }

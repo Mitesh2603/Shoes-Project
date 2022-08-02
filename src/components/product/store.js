@@ -39,12 +39,9 @@ export const store = createStore({
   },
   mutations: {
     ADD_Item(state, products) {
-      // console.log("Add icon id", id, state.StoreCart);
       state.StoreCart.push(products);
     },
     REMOVE_Item(state, id) {
-      // console.log("id", id);
-      console.log("state", state);
       state.StoreCart.splice(id, 1);
     },
   },

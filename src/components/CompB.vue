@@ -15,7 +15,7 @@ export default {
   // },
   methods: {
     reduceCount() {
-      this.$store.commit("reduceCount");
+      store.commit("reduceCount");
     },
   },
 };
