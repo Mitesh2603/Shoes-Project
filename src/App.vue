@@ -1,17 +1,20 @@
 <template>
   <center>
     <div>
-      <router-view />
+      <!-- <router-view /> -->
+      <BlogPage />
     </div>
   </center>
 </template>
 
 <script lang="ts">
 import Home from "./components/product/StateProduct.vue";
+import BlogPage from "./components/Blogs/BlogPage.vue";
 export default {
   name: "App",
   components: {
     Home,
+    BlogPage,
   },
 };
 </script>

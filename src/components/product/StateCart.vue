@@ -6,32 +6,29 @@
         <div><img :src="image" height="100" /></div>
         <span class="price">{{ " Rs. " + price }}</span>
       </div>
-      <button v-if="add" class="addBtn" @click="addToCart(id)">
+      <button v-if="remove" class="addBtn" @click="addToCart(id)">
         Add To Cart
       </button>
-      <!-- <button v-if="!remove" class="removeBtn" @click="removeItem(index, item)">
-        Remove Item
-      </button> -->
+      <button v-else class="removeBtn" @click="removeItem(index, item)">
+        Remove From Cart
+      </button>
     </span>
   </div>
 </template>
 
-<script>
+<script lang="ts">
 import { store } from "./store.js";
 
 export default {
   name: "product",
-  data() {
-    return {
-      add: true,
-      // remove: true,
-    };
-  },
-  props: ["id", "name", "image", "price"],
+  props: ["id", "name", "image", "price", "remove"],
   methods: {
     addToCart(id) {
       console.log(id, "Add to cart");
       store.dispatch("addItem", id);
+    },
+    removeItem() {
+      this.$emit("remove");
     },
   },
 };
