@@ -1,4 +1,5 @@
 <template>
+  <h1>CART</h1>
   <Cart
     v-for="(item, index) in cart"
     @click="removeItem(index, item)"
@@ -7,19 +8,12 @@
     :name="item.name"
     :image="item.image"
     :price="item.price"
+    :remove="false"
   />
-  <!-- <div v-for="(item, index) in cart">
-    <div>
-      {{ item.name }}
-    </div>
-    <div>
-      <button @click="removeItem(index, item)">Remove Item</button>
-    </div>
-  </div> -->
   <router-link to="/StateProduct">Back To Shopping</router-link>
 </template>
 
-<script>
+<script lang="ts">
 import { store } from "./store.js";
 import Cart from "./StateCart.vue";
 
@@ -37,6 +31,7 @@ export default {
   },
   methods: {
     removeItem(index) {
+      console.log("Remove From Cart", index);
       store.dispatch("removeItem", index);
     },
   },

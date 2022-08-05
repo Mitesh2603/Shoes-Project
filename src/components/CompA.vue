@@ -7,24 +7,24 @@ export default {
       store,
     };
   },
-  methods: {
-    computed: {
-      ...mapState("some/nested/module", {
-        a: (state) => state.a,
-        b: (state) => state.b,
-      }),
-      ...mapGetters("some/nested/module", [
-        "someGetter", // -> this.someGetter
-        "someOtherGetter", // -> this.someOtherGetter
-      ]),
-    },
-    methods: {
-      ...mapActions("some/nested/module", [
-        "foo", // -> this.foo()
-        "bar", // -> this.bar()
-      ]),
-    },
-  },
+  // methods: {
+  //   computed: {
+  //     ...mapState("some/nested/module", {
+  //       a: (state) => state.a,
+  //       b: (state) => state.b,
+  //     }),
+  //     ...mapGetters("some/nested/module", [
+  //       "someGetter", // -> this.someGetter
+  //       "someOtherGetter", // -> this.someOtherGetter
+  //     ]),
+  //   },
+  //   methods: {
+  //     ...mapActions("some/nested/module", [
+  //       "foo", // -> this.foo()
+  //       "bar", // -> this.bar()
+  //     ]),
+  //   },
+  // },
 };
 </script>
 

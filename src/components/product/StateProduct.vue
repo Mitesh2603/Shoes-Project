@@ -1,5 +1,5 @@
 <template>
-  <h1 class="title">CART</h1>
+  <h1 class="title">Shopping</h1>
   <Cart
     v-for="product in products"
     :id="product.id"
@@ -7,11 +7,12 @@
     :image="product.image"
     :price="product.price"
     :key="product.id"
+    :remove="true"
   />
   <router-link class="cart" to="/StateShopping">Go to Cart</router-link>
 </template>
 
-<script>
+<script lang="ts">
 import { store } from "./store.js";
 import Cart from "./StateCart.vue";
 import Shopping from "./StateShopping.vue";

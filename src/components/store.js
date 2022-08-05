@@ -17,7 +17,7 @@ const moduleA = {
     },
     reduceCount: (state) => {
       setTimeout(function () {
-        state.count -= count;
+        state.count -= state.count;
       }, 3000);
     },
   },
