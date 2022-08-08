@@ -14,21 +14,25 @@
 
   <center>
     <div>
-      <!-- <router-view /> -->
-      <BlogPage />
+      <router-view />
+      <!-- <BlogPage /> -->
+      <!-- <Home /> -->
+      <!-- <Modal /> -->
     </div>
   </center>
 
 </template>
 
 <script lang="ts">
-import Home from "./components/product/StateProduct.vue";
+import Home from "./components/CRUD/Home.vue";
+import Modal from "./components/CRUD/Modal.vue";
 import BlogPage from "./components/Blogs/BlogPage.vue";
 export default {
   name: "App",
   components: {
     Home,
     BlogPage,
+    Modal,
   },
 };
 </script>
