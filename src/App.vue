@@ -1,12 +1,7 @@
 <template>
-  <center>
     <div>
       <router-view />
-      <!-- <BlogPage /> -->
-      <!-- <Home /> -->
-      <!-- <Modal /> -->
     </div>
-  </center>
 </template>
 
 <script lang="ts">

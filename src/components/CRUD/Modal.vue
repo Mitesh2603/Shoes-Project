@@ -4,62 +4,95 @@
       <div class="modal-wrapper">
         <div class="modal-container">
           <table>
-            <div class="fname">
-              <slot name="fname">
-                <label>First Name : </label>
+            <div class="studentInfo">Student Information</div>
+            <div class="input">
+              <div class="fname">
+                <label for="fname">First Name : </label>
                 <input
                   class="form-field"
+                  for="fname"
                   type="text"
                   placeholder="First Name"
                   id="fname"
-                  v-model="fname"
-              /></slot>
-            </div>
-            <br />
-            <div class="lname">
-              <slot name="lname"
-                ><label>Last Name : </label
+                  v-model="form.fname"
+                  :class="{
+                    'is-invalid': submitted && $v.form.fname.$error,
+                  }"
+                />
+                <div
+                  v-if="submitted && !$v.form.fname.required"
+                  class="invalid-feedback"
+                >
+                  First Name is required
+                </div>
+              </div>
+              <br />
+              <div class="lname">
+                <label>Last Name : </label
                 ><input
                   class="form-field"
+                  for="lname"
                   type="text"
                   placeholder="Last Name"
                   id="lname"
                   v-model="lname"
-              /></slot>
-            </div>
-            <br />
-            <div class="number">
-              <slot name="number"
-                ><label>Number : </label
+                  :class="{
+                    'is-invalid': submitted && $v.form.lname.$error,
+                  }"
+                />
+                <div
+                  v-if="submitted && !$v.form.lname.required"
+                  class="invalid-feedback"
+                >
+                  Last Name is required
+                </div>
+              </div>
+              <br />
+              <div class="number">
+                <label>Number : </label
                 ><input
                   class="form-field"
+                  for="number"
                   type="number"
                   placeholder="Number"
                   id="number"
                   v-model="number"
-              /></slot>
-            </div>
-            <br />
-            <div class="email">
-              <slot name="email"
-                ><label>Email : </label
+                />
+              </div>
+              <br />
+              <div class="email">
+                <label>Email : </label
                 ><input
                   class="form-field"
+                  for="email"
                   type="text"
                   placeholder="Email"
                   id="email"
                   v-model="email"
-              /></slot>
+                  :class="{ 'is-invalid': submitted && $v.form.email.$error }"
+                />
+                <div
+                  v-if="submitted && $v.form.email.$error"
+                  class="invalid-feedback"
+                >
+                  <span v-if="!$v.form.email.required">Email is required</span>
+                  <span v-if="!$v.form.email.email">Email is invalid</span>
+                </div>
+              </div>
             </div>
           </table>
           <br />
           <div class="modal-footer">
-            <slot name="footer">
-              <button class="button" @click="displayContent">
-                Submit</button
-              ><br /><br />
-              <button class="button" @click="$emit('close')">Cancel</button>
-            </slot>
+            <button
+              class="button"
+              @click="
+                displayContent();
+                $emit('close');
+              "
+            >
+              Submit
+            </button>
+            <button class="button" @click="$emit('close')">Cancel</button>
           </div>
         </div>
       </div>
@@ -68,19 +101,35 @@
 </template>
 
 <script>
+import useVuelidate from "@vuelidate/core";
+import { required, email, minLength, maxLength } from "@vuelidate/validators";
+
 export default {
+  setup() {
+    return { v$: useVuelidate() };
+  },
   data() {
     return {
-      form: {
-        fname: "",
-        lname: "",
-        number: "",
-        email: "",
-      },
+      form: ["fname", "lname", "number", "email"],
+      fname: "",
+      lname: "",
+      number: "",
+      email: "",
+      submitted: false,
+    };
+  },
+  validations() {
+    return {
+      fname: { required },
+      lname: { required },
+      number: { required, min: minLength(10), max: maxLength(10) },
+      email: { required, email },
     };
   },
   methods: {
     displayContent() {
+      this.submitted = true;
+      
       const NewInformation = {
         First_Name: this.fname,
         Last_Name: this.lname,
@@ -94,6 +143,25 @@ export default {
 </script>
 
 <style scoped>
+label {
+  display: inline-flex;
+  flex: 1;
+  width: 90px;
+}
+
+.form-field {
+  width: 55%;
+  padding: 8px 16px;
+  line-height: 25px;
+  font-size: 14px;
+  font-weight: 500;
+  font-family: inherit;
+  border-radius: 6px;
+  -webkit-appearance: none;
+  color: var(--input-color);
+  border: 1px solid #1899d6;
+  transition: border 0.3s ease;
+}
 .modal-mask {
   position: fixed;
   z-index: 9998;
@@ -114,7 +182,7 @@ export default {
 .modal-container {
   width: 300px;
   margin: 0px auto;
-  padding: 50px 60px;
+  padding: 30px 40px;
   background-color: #fff;
   border-radius: 20px;
   box-shadow: 0 2px 8px rgba(0, 0, 0, 0.33);
@@ -155,7 +223,7 @@ export default {
   font-weight: 700;
   letter-spacing: 0.8px;
   line-height: 20px;
-  margin: 0;
+  margin: 10px;
   outline: none;
   overflow: visible;
   padding: 13px 16px;
@@ -163,12 +231,11 @@ export default {
   text-transform: uppercase;
   touch-action: manipulation;
   transform: translateZ(0);
-  transition: filter 0.2s;
   user-select: none;
   -webkit-user-select: none;
   vertical-align: middle;
   white-space: nowrap;
-  width: 100%;
+  width: 40%;
 }
 
 .button:after {
@@ -200,17 +267,10 @@ export default {
   cursor: auto;
 }
 
-.form-field {
-  width: 55%;
-  padding: 8px 16px;
-  line-height: 25px;
-  font-size: 14px;
-  font-weight: 500;
-  font-family: inherit;
-  border-radius: 6px;
-  -webkit-appearance: none;
-  color: var(--input-color);
-  border: 1px solid #1899d6;
-  transition: border 0.3s ease;
+.studentInfo {
+  padding: 15px;
+  text-align: center;
+  font-size: 25px;
+  font-family: "Times New Roman", Times, serif;
 }
 </style>

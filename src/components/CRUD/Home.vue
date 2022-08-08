@@ -5,20 +5,24 @@
         Add Information
       </button>
     </div>
-    <table>
-      <tr>
-        <th>First_Name</th>
-        <th>Last_Name</th>
-        <th>Number</th>
-        <th>Email</th>
-      </tr>
-      <tr>
-        <td>{{ result.First_Name }}</td>
-        <td>{{ result.Last_Name }}</td>
-        <td>{{ result.Number }}</td>
-        <td>{{ result.Email }}</td>
-      </tr>
-    </table>
+    <div>
+      <table>
+        <tr>
+          <th>First_Name</th>
+          <th>Last_Name</th>
+          <th>Number</th>
+          <th>Email</th>
+          <th>Edit</th>
+        </tr>
+        <tr v-for="item in result" :key="item">
+          <td>{{ item.First_Name }}</td>
+          <td>{{ item.Last_Name }}</td>
+          <td>{{ item.Number }}</td>
+          <td>{{ item.Email }}</td>
+          <!-- <td>Update</td> -->
+        </tr>
+      </table>
+    </div>
     <Modal
       v-if="showModal"
       @close="showModal = false"
@@ -43,7 +47,9 @@ export default {
   },
   methods: {
     fetchData(data) {
-      this.result = data;
+      console.log("Data", data);
+      this.result.push(data);
+      console.log("Result", this.result);
     },
   },
 };
