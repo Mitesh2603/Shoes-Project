@@ -3,84 +3,58 @@
     <div class="modal-mask">
       <div class="modal-wrapper">
         <div class="modal-container">
-          <table>
-            <div class="studentInfo">Student Information</div>
-            <div class="input">
-              <div class="fname">
-                <label for="fname">First Name : </label>
-                <input
-                  class="form-field"
-                  for="fname"
-                  type="text"
-                  placeholder="First Name"
-                  id="fname"
-                  v-model="form.fname"
-                  :class="{
-                    'is-invalid': submitted && $v.form.fname.$error,
-                  }"
-                />
-                <div
-                  v-if="submitted && !$v.form.fname.required"
-                  class="invalid-feedback"
-                >
-                  First Name is required
-                </div>
-              </div>
-              <br />
-              <div class="lname">
-                <label>Last Name : </label
-                ><input
-                  class="form-field"
-                  for="lname"
-                  type="text"
-                  placeholder="Last Name"
-                  id="lname"
-                  v-model="lname"
-                  :class="{
-                    'is-invalid': submitted && $v.form.lname.$error,
-                  }"
-                />
-                <div
-                  v-if="submitted && !$v.form.lname.required"
-                  class="invalid-feedback"
-                >
-                  Last Name is required
-                </div>
-              </div>
-              <br />
-              <div class="number">
-                <label>Number : </label
-                ><input
-                  class="form-field"
-                  for="number"
-                  type="number"
-                  placeholder="Number"
-                  id="number"
-                  v-model="number"
-                />
-              </div>
-              <br />
-              <div class="email">
-                <label>Email : </label
-                ><input
-                  class="form-field"
-                  for="email"
-                  type="text"
-                  placeholder="Email"
-                  id="email"
-                  v-model="email"
-                  :class="{ 'is-invalid': submitted && $v.form.email.$error }"
-                />
-                <div
-                  v-if="submitted && $v.form.email.$error"
-                  class="invalid-feedback"
-                >
-                  <span v-if="!$v.form.email.required">Email is required</span>
-                  <span v-if="!$v.form.email.email">Email is invalid</span>
-                </div>
-              </div>
+          <div class="studentInfo">Student Information</div>
+          <!-- <form @submit.prevent="displayContent()"> -->
+          <div class="input">
+            <div class="firstname">
+              <label for="firstname">First Name : </label>
+              <input
+                class="form-field"
+                ref="firstname"
+                type="text"
+                placeholder="First Name"
+                id="firstname"
+                v-model="firstname"
+                name="firstname"
+              />
             </div>
-          </table>
+            <br />
+            <div class="lastname">
+              <label for="lastname">Last Name : </label
+              ><input
+                class="form-field"
+                type="text"
+                placeholder="Last Name"
+                id="lastname"
+                name="lastname"
+                v-model="lastname"
+              />
+            </div>
+            <br />
+            <div class="number">
+              <label for="number">Number : </label
+              ><input
+                class="form-field"
+                type="number"
+                name="number"
+                placeholder="Number"
+                id="number"
+                v-model="number"
+              />
+            </div>
+            <br />
+            <div class="email">
+              <label for="email">Email : </label
+              ><input
+                class="form-field"
+                type="text"
+                placeholder="Email"
+                id="email"
+                name="email"
+                v-model="email"
+              />
+            </div>
+          </div>
           <br />
           <div class="modal-footer">
             <button
@@ -94,6 +68,7 @@
             </button>
             <button class="button" @click="$emit('close')">Cancel</button>
           </div>
+          <!-- </form> -->
         </div>
       </div>
     </div>
@@ -103,52 +78,83 @@
 <script>
 import useVuelidate from "@vuelidate/core";
 import { required, email, minLength, maxLength } from "@vuelidate/validators";
+import { store } from "./store.js";
 
 export default {
   setup() {
     return { v$: useVuelidate() };
   },
-  data() {
-    return {
-      form: ["fname", "lname", "number", "email"],
-      fname: "",
-      lname: "",
-      number: "",
-      email: "",
-      submitted: false,
-    };
-  },
-  validations() {
-    return {
-      fname: { required },
-      lname: { required },
-      number: { required, min: minLength(10), max: maxLength(10) },
-      email: { required, email },
-    };
-  },
   methods: {
     displayContent() {
-      this.submitted = true;
-      
       const NewInformation = {
-        First_Name: this.fname,
-        Last_Name: this.lname,
-        Number: this.number,
-        Email: this.email,
+        firstname: store.state.newData.firstname,
+        lastname: store.state.newData.lastname,
+        number: store.state.newData.number,
+        email: store.state.newData.email,
       };
+
       this.$emit("displayData", NewInformation);
+      console.log(NewInformation);
+
+      this.firstname = "";
+      this.lastname = "";
+      this.number = "";
+      this.email = "";
+    },
+  },
+  computed: {
+    firstname: {
+      get() {
+        return store.state.newData.firstname;
+      },
+      set(value) {
+        store.commit("setFirstname", value);
+      },
+    },
+    lastname: {
+      get() {
+        return store.state.newData.lastname;
+      },
+      set(value) {
+        store.commit("setLastname", value);
+      },
+    },
+    number: {
+      get() {
+        return store.state.newData.number;
+      },
+      set(value) {
+        store.commit("setNumber", value);
+      },
+    },
+    email: {
+      get() {
+        return store.state.newData.email;
+      },
+      set(value) {
+        store.commit("setEmail", value);
+      },
     },
   },
 };
 </script>
 
 <style scoped>
+.invalid-feedback {
+  width: 100%;
+  margin-top: 0.25rem;
+  font-size: 80%;
+  color: #dc3545;
+  padding-left: 90px;
+}
 label {
   display: inline-flex;
   flex: 1;
   width: 90px;
 }
-
+.form-field.is-invalid {
+  border-color: #dc3545;
+}
 .form-field {
   width: 55%;
   padding: 8px 16px;

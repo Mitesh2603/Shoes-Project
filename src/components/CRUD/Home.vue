@@ -8,18 +8,58 @@
     <div>
       <table>
         <tr>
-          <th>First_Name</th>
-          <th>Last_Name</th>
+          <th>First Name</th>
+          <th>Last Name</th>
           <th>Number</th>
           <th>Email</th>
           <th>Edit</th>
+          <th>Delete</th>
         </tr>
-        <tr v-for="item in result" :key="item">
-          <td>{{ item.First_Name }}</td>
-          <td>{{ item.Last_Name }}</td>
-          <td>{{ item.Number }}</td>
-          <td>{{ item.Email }}</td>
-          <!-- <td>Update</td> -->
+        <tr v-for="(item, index) in result" :key="item">
+          <td>
+            <input
+              type="text"
+              :v-model="item.firstname"
+              :value="item.firstname"
+              :disabled="disabled"
+            />
+          </td>
+          <td>
+            <input
+              type="text"
+              :v-model="item.lastname"
+              :value="item.lastname"
+              :disabled="disabled"
+            />
+          </td>
+          <td>
+            <input
+              type="text"
+              :v-model="item.number"
+              :value="item.number"
+              :disabled="disabled"
+            />
+          </td>
+          <td>
+            <input
+              type="text"
+              :v-model="item.email"
+              :value="item.email"
+              :disabled="disabled"
+            />
+          </td>
+          <td
+            style="cursor: pointer"
+            @click="
+              editMember(index, item);
+              disabled = !disabled;
+            "
+          >
+            Edit
+          </td>
+          <td style="cursor: pointer" @click="removeMember(index, item)">
+            Delete
+          </td>
         </tr>
       </table>
     </div>
@@ -40,6 +80,7 @@ export default {
     return {
       showModal: false,
       result: [],
+      disabled: true,
     };
   },
   components: {
@@ -47,9 +88,13 @@ export default {
   },
   methods: {
     fetchData(data) {
-      console.log("Data", data);
       this.result.push(data);
-      console.log("Result", this.result);
+    },
+    removeMember(index) {
+      this.result.splice(index, 1);
+    },
+    editMember(data) {
+      this.showModal = true;
     },
   },
 };
