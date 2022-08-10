@@ -3,64 +3,72 @@
     <div class="modal-mask">
       <div class="modal-wrapper">
         <div class="modal-container">
-          <table>
-            <div class="fname">
-              <slot name="fname">
-                <label>First Name : </label>
-                <input
-                  class="form-field"
-                  type="text"
-                  placeholder="First Name"
-                  id="fname"
-                  v-model="fname"
-              /></slot>
+          <div class="studentInfo">Student Information</div>
+          <!-- <form @submit.prevent="displayContent()"> -->
+          <div class="input">
+            <div class="firstname">
+              <label for="firstname">First Name : </label>
+              <input
+                class="form-field"
+                ref="firstname"
+                type="text"
+                placeholder="First Name"
+                id="firstname"
+                v-model="firstname"
+                name="firstname"
+              />
             </div>
             <br />
-            <div class="lname">
-              <slot name="lname"
-                ><label>Last Name : </label
-                ><input
-                  class="form-field"
-                  type="text"
-                  placeholder="Last Name"
-                  id="lname"
-                  v-model="lname"
-              /></slot>
+            <div class="lastname">
+              <label for="lastname">Last Name : </label
+              ><input
+                class="form-field"
+                type="text"
+                placeholder="Last Name"
+                id="lastname"
+                name="lastname"
+                v-model="lastname"
+              />
             </div>
             <br />
             <div class="number">
-              <slot name="number"
-                ><label>Number : </label
-                ><input
-                  class="form-field"
-                  type="number"
-                  placeholder="Number"
-                  id="number"
-                  v-model="number"
-              /></slot>
+              <label for="number">Number : </label
+              ><input
+                class="form-field"
+                type="number"
+                name="number"
+                placeholder="Number"
+                id="number"
+                v-model="number"
+              />
             </div>
             <br />
             <div class="email">
-              <slot name="email"
-                ><label>Email : </label
-                ><input
-                  class="form-field"
-                  type="text"
-                  placeholder="Email"
-                  id="email"
-                  v-model="email"
-              /></slot>
+              <label for="email">Email : </label
+              ><input
+                class="form-field"
+                type="text"
+                placeholder="Email"
+                id="email"
+                name="email"
+                v-model="email"
+              />
             </div>
-          </table>
+          </div>
           <br />
           <div class="modal-footer">
-            <slot name="footer">
-              <button class="button" @click="displayContent">
-                Submit</button
-              ><br /><br />
-              <button class="button" @click="$emit('close')">Cancel</button>
-            </slot>
+            <button
+              class="button"
+              @click="
+                displayContent();
+                $emit('close');
+              "
+            >
+              Submit
+            </button>
+            <button class="button" @click="$emit('close')">Cancel</button>
           </div>
+          <!-- </form> -->
         </div>
       </div>
     </div>
@@ -68,32 +76,98 @@
 </template>
 
 <script>
+import useVuelidate from "@vuelidate/core";
+import { required, email, minLength, maxLength } from "@vuelidate/validators";
+import { store } from "./store.js";
+
 export default {
-  data() {
-    return {
-      form: {
-        fname: "",
-        lname: "",
-        number: "",
-        email: "",
-      },
-    };
+  setup() {
+    return { v$: useVuelidate() };
   },
   methods: {
     displayContent() {
       const NewInformation = {
-        First_Name: this.fname,
-        Last_Name: this.lname,
-        Number: this.number,
-        Email: this.email,
+        firstname: store.state.newData.firstname,
+        lastname: store.state.newData.lastname,
+        number: store.state.newData.number,
+        email: store.state.newData.email,
       };
+
       this.$emit("displayData", NewInformation);
+      console.log(NewInformation);
+
+      this.firstname = "";
+      this.lastname = "";
+      this.number = "";
+      this.email = "";
+    },
+  },
+  computed: {
+    firstname: {
+      get() {
+        return store.state.newData.firstname;
+      },
+      set(value) {
+        store.commit("setFirstname", value);
+      },
+    },
+    lastname: {
+      get() {
+        return store.state.newData.lastname;
+      },
+      set(value) {
+        store.commit("setLastname", value);
+      },
+    },
+    number: {
+      get() {
+        return store.state.newData.number;
+      },
+      set(value) {
+        store.commit("setNumber", value);
+      },
+    },
+    email: {
+      get() {
+        return store.state.newData.email;
+      },
+      set(value) {
+        store.commit("setEmail", value);
+      },
     },
   },
 };
 </script>
 
 <style scoped>
+.invalid-feedback {
+  width: 100%;
+  margin-top: 0.25rem;
+  font-size: 80%;
+  color: #dc3545;
+  padding-left: 90px;
+}
+label {
+  display: inline-flex;
+  flex: 1;
+  width: 90px;
+}
+.form-field.is-invalid {
+  border-color: #dc3545;
+}
+.form-field {
+  width: 55%;
+  padding: 8px 16px;
+  line-height: 25px;
+  font-size: 14px;
+  font-weight: 500;
+  font-family: inherit;
+  border-radius: 6px;
+  -webkit-appearance: none;
+  color: var(--input-color);
+  border: 1px solid #1899d6;
+  transition: border 0.3s ease;
+}
 .modal-mask {
   position: fixed;
   z-index: 9998;
@@ -114,7 +188,7 @@ export default {
 .modal-container {
   width: 300px;
   margin: 0px auto;
-  padding: 50px 60px;
+  padding: 30px 40px;
   background-color: #fff;
   border-radius: 20px;
   box-shadow: 0 2px 8px rgba(0, 0, 0, 0.33);
@@ -155,7 +229,7 @@ export default {
   font-weight: 700;
   letter-spacing: 0.8px;
   line-height: 20px;
-  margin: 0;
+  margin: 10px;
   outline: none;
   overflow: visible;
   padding: 13px 16px;
@@ -163,12 +237,11 @@ export default {
   text-transform: uppercase;
   touch-action: manipulation;
   transform: translateZ(0);
-  transition: filter 0.2s;
   user-select: none;
   -webkit-user-select: none;
   vertical-align: middle;
   white-space: nowrap;
-  width: 100%;
+  width: 40%;
 }
 
 .button:after {
@@ -200,17 +273,10 @@ export default {
   cursor: auto;
 }
 
-.form-field {
-  width: 55%;
-  padding: 8px 16px;
-  line-height: 25px;
-  font-size: 14px;
-  font-weight: 500;
-  font-family: inherit;
-  border-radius: 6px;
-  -webkit-appearance: none;
-  color: var(--input-color);
-  border: 1px solid #1899d6;
-  transition: border 0.3s ease;
+.studentInfo {
+  padding: 15px;
+  text-align: center;
+  font-size: 25px;
+  font-family: "Times New Roman", Times, serif;
 }
 </style>

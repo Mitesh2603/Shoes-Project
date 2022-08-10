@@ -5,20 +5,64 @@
         Add Information
       </button>
     </div>
-    <table>
-      <tr>
-        <th>First_Name</th>
-        <th>Last_Name</th>
-        <th>Number</th>
-        <th>Email</th>
-      </tr>
-      <tr>
-        <td>{{ result.First_Name }}</td>
-        <td>{{ result.Last_Name }}</td>
-        <td>{{ result.Number }}</td>
-        <td>{{ result.Email }}</td>
-      </tr>
-    </table>
+    <div>
+      <table>
+        <tr>
+          <th>First Name</th>
+          <th>Last Name</th>
+          <th>Number</th>
+          <th>Email</th>
+          <th>Edit</th>
+          <th>Delete</th>
+        </tr>
+        <tr v-for="(item, index) in result" :key="item">
+          <td>
+            <input
+              type="text"
+              :v-model="item.firstname"
+              :value="item.firstname"
+              :disabled="disabled"
+            />
+          </td>
+          <td>
+            <input
+              type="text"
+              :v-model="item.lastname"
+              :value="item.lastname"
+              :disabled="disabled"
+            />
+          </td>
+          <td>
+            <input
+              type="text"
+              :v-model="item.number"
+              :value="item.number"
+              :disabled="disabled"
+            />
+          </td>
+          <td>
+            <input
+              type="text"
+              :v-model="item.email"
+              :value="item.email"
+              :disabled="disabled"
+            />
+          </td>
+          <td
+            style="cursor: pointer"
+            @click="
+              editMember(index, item);
+              disabled = !disabled;
+            "
+          >
+            Edit
+          </td>
+          <td style="cursor: pointer" @click="removeMember(index, item)">
+            Delete
+          </td>
+        </tr>
+      </table>
+    </div>
     <Modal
       v-if="showModal"
       @close="showModal = false"
@@ -36,6 +80,7 @@ export default {
     return {
       showModal: false,
       result: [],
+      disabled: true,
     };
   },
   components: {
@@ -43,7 +88,13 @@ export default {
   },
   methods: {
     fetchData(data) {
-      this.result = data;
+      this.result.push(data);
+    },
+    removeMember(index) {
+      this.result.splice(index, 1);
+    },
+    editMember(data) {
+      this.showModal = true;
     },
   },
 };

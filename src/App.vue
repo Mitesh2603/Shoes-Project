@@ -1,26 +1,7 @@
 <template>
-
-  <header>
-    <img
-      alt="Vue logo"
-      class="logo mb-5 text-red-100"
-
-      src="@/assets/logo.svg"
-
-    />
-  </header>
-  <Helloworld msg="Welcome to Vue" />
-  <hello />
-
-  <center>
     <div>
       <router-view />
-      <!-- <BlogPage /> -->
-      <!-- <Home /> -->
-      <!-- <Modal /> -->
     </div>
-  </center>
-
 </template>
 
 <script lang="ts">
