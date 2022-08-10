@@ -1,18 +1,16 @@
 <template>
-    <div>
-      <router-view />
-    </div>
+  <div>
+    <router-view />
+  </div>
 </template>
 
 <script lang="ts">
 import Home from "./components/CRUD/Home.vue";
 import Modal from "./components/CRUD/Modal.vue";
-import BlogPage from "./components/Blogs/BlogPage.vue";
 export default {
   name: "App",
   components: {
     Home,
-    BlogPage,
     Modal,
   },
 };
@@ -21,38 +19,7 @@ export default {
 <style scoped>
 div {
   margin-top: 10px;
-  margin-left: 30%;
-  margin-right: 30%;
+  margin-left: 10%;
+  margin-right: 10%;
 }
 </style>
-
-<!-- <template>
-  <div id="app">
-    <NumberDisplay />
-    <NumberSubmit />
-  </div>
-</template>
-
-<script>
-import NumberDisplay from "./components/Count/NumberDisplay.vue";
-import NumberSubmit from "./components/Count/NumberSubmit.vue";
-
-export default {
-  name: "App",
-  components: {
-    NumberDisplay,
-    NumberSubmit,
-  },
-};
-</script>
-
-<style>
-#app {
-  font-family: "Avenir", Helvetica, Arial, sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-  text-align: center;
-  color: #2c3e50;
-  margin-top: 60px;
-}
-</style> -->
