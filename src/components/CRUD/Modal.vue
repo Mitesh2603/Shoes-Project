@@ -4,13 +4,11 @@
       <div class="modal-wrapper">
         <div class="modal-container">
           <div class="studentInfo">Student Information</div>
-          <!-- <form @submit.prevent="displayContent()"> -->
           <div class="input">
             <div class="firstname">
               <label for="firstname">First Name : </label>
               <input
                 class="form-field"
-                ref="firstname"
                 type="text"
                 placeholder="First Name"
                 id="firstname"
@@ -68,7 +66,6 @@
             </button>
             <button class="button" @click="$emit('close')">Cancel</button>
           </div>
-          <!-- </form> -->
         </div>
       </div>
     </div>

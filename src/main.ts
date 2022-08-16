@@ -2,6 +2,18 @@ import { router } from "./router";
 import { createApp } from "vue";
 import App from "./App.vue";
 
-const app = createApp(App);
+import { FontAwesomeIcon } from "@fortawesome/vue-fontawesome";
+import { library } from "@fortawesome/fontawesome-svg-core";
+import {
+  faXmark,
+  faPenToSquare,
+  faTrash,
+  faAt,
+  faCheck,
+} from "@fortawesome/free-solid-svg-icons";
+
+library.add(faXmark, faPenToSquare, faTrash, faAt, faCheck);
+
+const app = createApp(App).component("font-awesome-icon", FontAwesomeIcon);
 app.use(router);
 app.mount("#app");

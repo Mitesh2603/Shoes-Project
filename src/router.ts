@@ -4,6 +4,7 @@ import Product from "./components/product/StateProduct.vue";
 import Back from "./components/product/StateProduct.vue";
 import Modal from "./components/CRUD/Modal.vue";
 import Home from "./components/CRUD/Home.vue";
+import Cart from "./components/product/Cart.vue";
 
 export const router = createRouter({
   history: createWebHistory(),
@@ -11,6 +12,7 @@ export const router = createRouter({
   routes: [
     // { path: "/", component: Product, name: "Product" },
     { path: "/", component: Home, name: "Home" },
+    // { path: "/cart", component: Cart, name: "Cart" },
     // { path: "/StateShopping", component: Shopping, name: "Shopping" },
     // { path: "/StateProduct", component: Back, name: "Back" },
     { path: "/Modal", component: Modal, name: "Modal" },
