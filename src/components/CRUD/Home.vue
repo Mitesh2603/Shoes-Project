@@ -34,8 +34,9 @@
               style="cursor: pointer"
               @click="disabled = !disabled"
             >
-              <font-awesome-icon icon="fa-pen-to-square" /></span
-            ><span
+              <font-awesome-icon icon="fa-pen-to-square"
+            /></span>
+            <span
               class="edit"
               v-if="!disabled"
               style="cursor: pointer"
@@ -43,7 +44,7 @@
               ><font-awesome-icon icon="fa-solid fa-check"
             /></span>
             <span
-              class="delete"
+              class="edit"
               style="cursor: pointer"
               @click="removeMember(index, item)"
             >
@@ -79,9 +80,6 @@ export default {
   methods: {
     fetchData(data) {
       // this.result.push(data);
-      if (!localStorage.getItem("result")) {
-        localStorage.setItem("result", JSON.stringify([]));
-      }
       const member = JSON.parse(localStorage.getItem("result"));
       member.push(data);
       localStorage.setItem("result", JSON.stringify(member));
