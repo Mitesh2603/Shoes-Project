@@ -1,17 +1,29 @@
 <template>
-  <div>
-    <router-view />
+  <div class="container">
+    <Counter /><br />
+    <div class="columns">
+      <div class="column is-11">
+        <AddCounter></AddCounter>
+      </div>
+      <div class="column auto">
+        <RemoveCounter></RemoveCounter>
+      </div>
+    </div>
   </div>
+  <router-view></router-view>
 </template>
 
 <script lang="ts">
-import Home from "./components/CRUD/Home.vue";
-import Modal from "./components/CRUD/Modal.vue";
+import Counter from "./components/Counter/Counter.vue";
+import AddCounter from "./components/Counter/AddCounter.vue";
+import RemoveCounter from "./components/Counter/RemoveCounter.vue";
+
 export default {
   name: "App",
   components: {
-    Home,
-    Modal,
+    Counter,
+    AddCounter,
+    RemoveCounter,
   },
 };
 </script>
