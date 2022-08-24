@@ -4,13 +4,14 @@
 
 <script>
 import store from "./store.js";
-import * as type from "./mutationTypes/types";
+import * as type from "./types";
 
 export default {
   methods: {
     removeCounter() {
       store.dispatch({
-        type: type.decrement,
+        // type: "decrement",
+        type: type.Decrement,
         amount: 10,
       });
     },

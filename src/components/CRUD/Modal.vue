@@ -1,88 +1,138 @@
 <template>
-  <transition name="modal">
+  <Transition name="modal">
     <div class="modal-mask">
       <div class="modal-wrapper">
-        <div class="modal-container">
-          <div class="studentInfo">Student Information</div>
-          <div class="input">
-            <div class="firstname">
-              <label for="firstname">First Name : </label>
-              <input
-                class="form-field"
-                type="text"
-                placeholder="First Name"
-                id="firstname"
-                v-model="firstname"
-                name="firstname"
-              />
+        <form
+          @submit.prevent="
+            displayContent();
+            $emit('close');
+          "
+        >
+          <div class="modal-container">
+            <div class="studentInfo">Student Information</div>
+            <div class="input">
+              <div class="firstname">
+                <label for="firstname">First Name : </label>
+                <input
+                  class="form-field"
+                  type="text"
+                  placeholder="First Name"
+                  id="firstname"
+                  v-model="firstname"
+                  v-validate="required"
+                  name="firstname"
+                  :class="{
+                    'is-invalid': submitted && error.has('firstName'),
+                  }"
+                />
+                <div
+                  v-if="submitted && error.has('firstName')"
+                  class="invalid-feedback"
+                >
+                  {{ error.first("firstName") }}
+                </div>
+              </div>
+              <br />
+              <div class="lastname">
+                <label for="lastname">Last Name : </label
+                ><input
+                  class="form-field"
+                  type="text"
+                  placeholder="Last Name"
+                  id="lastname"
+                  name="lastname"
+                  v-model="lastname"
+                  v-validate="'required'"
+                  :class="{ 'is-invalid': submitted && error.has('lastName') }"
+                />
+                <div
+                  v-if="submitted && error.has('lastName')"
+                  class="invalid-feedback"
+                >
+                  {{ error.first("lastName") }}
+                </div>
+              </div>
+              <br />
+              <div class="number">
+                <label for="number">Number : </label
+                ><input
+                  class="form-field"
+                  type="number"
+                  name="number"
+                  placeholder="Number"
+                  id="number"
+                  v-model="number"
+                  v-validate="{ required: true, min: 6 }"
+                  :class="{ 'is-invalid': submitted && error.has('number') }"
+                />
+                <div
+                  v-if="submitted && error.has('number')"
+                  class="invalid-feedback"
+                >
+                  {{ error.first("number") }}
+                </div>
+              </div>
+              <br />
+              <div class="email">
+                <label for="email">Email : </label
+                ><input
+                  class="form-field"
+                  type="text"
+                  placeholder="Email"
+                  id="email"
+                  name="email"
+                  v-model="email"
+                  v-validate="'required|email'"
+                  :class="{ 'is-invalid': submitted && error.has('email') }"
+                />
+                <div
+                  v-if="submitted && error.has('email')"
+                  class="invalid-feedback"
+                >
+                  {{ error.first("email") }}
+                </div>
+              </div>
             </div>
             <br />
-            <div class="lastname">
-              <label for="lastname">Last Name : </label
-              ><input
-                class="form-field"
-                type="text"
-                placeholder="Last Name"
-                id="lastname"
-                name="lastname"
-                v-model="lastname"
-              />
-            </div>
-            <br />
-            <div class="number">
-              <label for="number">Number : </label
-              ><input
-                class="form-field"
-                type="number"
-                name="number"
-                placeholder="Number"
-                id="number"
-                v-model="number"
-              />
-            </div>
-            <br />
-            <div class="email">
-              <label for="email">Email : </label
-              ><input
-                class="form-field"
-                type="text"
-                placeholder="Email"
-                id="email"
-                name="email"
-                v-model="email"
-              />
+            <div class="modal-footer">
+              <button class="button">Submit</button>
+              <button class="button" @click="$emit('close')">Cancel</button>
             </div>
           </div>
-          <br />
-          <div class="modal-footer">
-            <button
-              class="button"
-              @click="
-                displayContent();
-                $emit('close');
-              "
-            >
-              Submit
-            </button>
-            <button class="button" @click="$emit('close')">Cancel</button>
-          </div>
-        </div>
+        </form>
       </div>
     </div>
-  </transition>
+  </Transition>
 </template>
 
 <script>
-import useVuelidate from "@vuelidate/core";
 import { required, email, minLength, maxLength } from "@vuelidate/validators";
 import { store } from "./store.js";
 
 export default {
-  setup() {
-    return { v$: useVuelidate() };
+  data() {
+    return {
+      firstname: "",
+      lastname: "",
+      number: "",
+      email: "",
+      error: "",
+      submitted: false,
+    };
   },
+  validations: {
+    firstname: { required },
+    lastname: { required },
+    number: { required, min: minLength(10), max: maxLength(10) },
+    email: { required, email },
+  },
+  // setup() {
+  //   return { v$: useVuelidate() };
+  // },
   methods: {
     displayContent() {
+      this.submitted = true;
+
       const NewInformation = {
         firstname: store.state.newData.firstname,
         lastname: store.state.newData.lastname,
@@ -97,6 +147,16 @@ export default {
       this.lastname = "";
       this.number = "";
       this.email = "";
+
+      this.$validator.validate().then((valid) => {
+        if (valid) {
+          alert("SUCCESS!! :-)\n\n" + JSON.stringify(this));
+        }
+      });
+      // this.$v.$touch();
+      // if (this.$v.$invalid) {
+      //   return;
+      // }
     },
   },
   computed: {
@@ -137,7 +197,8 @@ export default {
 </script>
 
 <style scoped>
-.invalid-feedback {
+.invalid-feedback,
+.is-invalid {
   width: 100%;
   margin-top: 0.25rem;
   font-size: 80%;
