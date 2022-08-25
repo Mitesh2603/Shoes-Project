@@ -16,16 +16,36 @@
         </tr>
         <tr v-for="(item, index) in result" :key="item">
           <td>
-            <input type="text" v-model="item.firstname" :disabled="disabled" />
+            <input
+              type="text"
+              name="firstName"
+              v-model="item.firstname"
+              :disabled="disabled"
+            />
           </td>
           <td>
-            <input type="text" v-model="item.lastname" :disabled="disabled" />
+            <input
+              type="text"
+              name="lastName"
+              v-model="item.lastname"
+              :disabled="disabled"
+            />
           </td>
           <td>
-            <input type="number" v-model="item.number" :disabled="disabled" />
+            <input
+              type="number"
+              name="number"
+              v-model="item.number"
+              :disabled="disabled"
+            />
           </td>
           <td>
-            <input type="text" v-model="item.email" :disabled="disabled" />
+            <input
+              type="text"
+              name="email"
+              v-model="item.email"
+              :disabled="disabled"
+            />
           </td>
           <td>
             <span
@@ -79,14 +99,12 @@ export default {
   },
   methods: {
     fetchData(data) {
-      // this.result.push(data);
       const member = JSON.parse(localStorage.getItem("result"));
       member.push(data);
       localStorage.setItem("result", JSON.stringify(member));
       this.result = JSON.parse(localStorage.getItem("result"));
     },
     removeMember(index) {
-      // this.result.splice(index, 1);
       const member = JSON.parse(localStorage.getItem("result"));
       member.splice(index, 1);
       localStorage.setItem("result", JSON.stringify(member));

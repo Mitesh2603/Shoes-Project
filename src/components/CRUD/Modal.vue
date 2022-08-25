@@ -2,133 +2,106 @@
   <Transition name="modal">
     <div class="modal-mask">
       <div class="modal-wrapper">
-        <form
-          @submit.prevent="
+        <Form
+          @submit="
             displayContent();
             $emit('close');
           "
+          :validation-schema="schema"
+          v-slot="{ errors }"
         >
           <div class="modal-container">
             <div class="studentInfo">Student Information</div>
-            <div class="input">
-              <div class="firstname">
-                <label for="firstname">First Name : </label>
-                <input
-                  class="form-field"
-                  type="text"
-                  placeholder="First Name"
-                  id="firstname"
-                  v-model="firstname"
-                  v-validate="required"
-                  name="firstname"
-                  :class="{
-                    'is-invalid': submitted && error.has('firstName'),
-                  }"
-                />
-                <div
-                  v-if="submitted && error.has('firstName')"
-                  class="invalid-feedback"
-                >
-                  {{ error.first("firstName") }}
-                </div>
-              </div>
-              <br />
-              <div class="lastname">
-                <label for="lastname">Last Name : </label
-                ><input
-                  class="form-field"
-                  type="text"
-                  placeholder="Last Name"
-                  id="lastname"
-                  name="lastname"
-                  v-model="lastname"
-                  v-validate="'required'"
-                  :class="{ 'is-invalid': submitted && error.has('lastName') }"
-                />
-                <div
-                  v-if="submitted && error.has('lastName')"
-                  class="invalid-feedback"
-                >
-                  {{ error.first("lastName") }}
-                </div>
-              </div>
-              <br />
-              <div class="number">
-                <label for="number">Number : </label
-                ><input
-                  class="form-field"
-                  type="number"
-                  name="number"
-                  placeholder="Number"
-                  id="number"
-                  v-model="number"
-                  v-validate="{ required: true, min: 6 }"
-                  :class="{ 'is-invalid': submitted && error.has('number') }"
-                />
-                <div
-                  v-if="submitted && error.has('number')"
-                  class="invalid-feedback"
-                >
-                  {{ error.first("number") }}
-                </div>
-              </div>
-              <br />
-              <div class="email">
-                <label for="email">Email : </label
-                ><input
-                  class="form-field"
-                  type="text"
-                  placeholder="Email"
-                  id="email"
-                  name="email"
-                  v-model="email"
-                  v-validate="'required|email'"
-                  :class="{ 'is-invalid': submitted && error.has('email') }"
-                />
-                <div
-                  v-if="submitted && error.has('email')"
-                  class="invalid-feedback"
-                >
-                  {{ error.first("email") }}
-                </div>
-              </div>
+            <div class="firstname">
+              <label for="firstname">First Name : </label>
+              <Field
+                class="form-field"
+                type="text"
+                placeholder="First Name"
+                v-model="firstname"
+                name="firstName"
+                :class="{ 'is-invalid': errors.firstName }"
+              />
+              <div class="invalid-feedback">{{ errors.firstName }}</div>
             </div>
             <br />
-            <div class="modal-footer">
-              <button class="button">Submit</button>
-              <button class="button" @click="$emit('close')">Cancel</button>
+            <div class="lastName">
+              <label for="lastName">Last Name : </label>
+              <Field
+                class="form-field"
+                type="text"
+                placeholder="Last Name"
+                name="lastName"
+                v-model="lastname"
+                :class="{ 'is-invalid': errors.lastName }"
+              />
+              <div class="invalid-feedback">{{ errors.lastName }}</div>
             </div>
+            <br />
+            <div class="number">
+              <label for="number">Number : </label>
+              <Field
+                class="form-field"
+                type="number"
+                name="number"
+                placeholder="Number"
+                v-model="number"
+                :class="{ 'is-invalid': errors.number }"
+              />
+              <div class="invalid-feedback">{{ errors.number }}</div>
+            </div>
+            <br />
+            <div class="email">
+              <label for="email">Email : </label>
+              <Field
+                class="form-field"
+                type="text"
+                placeholder="Email"
+                name="email"
+                v-model="email"
+                :class="{ 'is-invalid': errors.email }"
+              />
+              <div class="invalid-feedback">{{ errors.email }}</div>
+            </div>
+            <button class="button">Submit</button>
+            <button class="button" @click="$emit('close')">Cancel</button>
           </div>
-        </form>
+        </Form>
       </div>
     </div>
   </Transition>
 </template>
 
 <script>
-import { required, email, minLength, maxLength } from "@vuelidate/validators";
 import { store } from "./store.js";
+import { Form, Field } from "vee-validate";
+import * as Yup from "yup";
 
 export default {
   data() {
+    const schema = Yup.object().shape({
+      firstName: Yup.string().required("First Name is required"),
+      lastName: Yup.string().required("Last name is required"),
+      email: Yup.string()
+        .required("Email is required")
+        .email("Email is invalid"),
+      number: Yup.string()
+        .min(10, "Number must be 10 characters")
+        .max(10, "Number must be 10 characters")
+        .required("Number is required"),
+    });
     return {
-      firstname: "",
-      lastname: "",
+      schema,
+      firstName: "",
+      lastName: "",
       number: "",
       email: "",
-      error: "",
-      submitted: false,
     };
   },
-  validations: {
-    firstname: { required },
-    lastname: { required },
-    number: { required, min: minLength(10), max: maxLength(10) },
-    email: { required, email },
+  components: {
+    Form,
+    Field,
   },
-  // setup() {
-  //   return { v$: useVuelidate() };
-  // },
   methods: {
     displayContent() {
       this.submitted = true;
@@ -141,22 +114,11 @@ export default {
       };
 
       this.$emit("displayData", NewInformation);
-      console.log(NewInformation);
 
       this.firstname = "";
       this.lastname = "";
       this.number = "";
       this.email = "";
-
-      this.$validator.validate().then((valid) => {
-        if (valid) {
-          alert("SUCCESS!! :-)\n\n" + JSON.stringify(this));
-        }
-      });
-      // this.$v.$touch();
-      // if (this.$v.$invalid) {
-      //   return;
-      // }
     },
   },
   computed: {
