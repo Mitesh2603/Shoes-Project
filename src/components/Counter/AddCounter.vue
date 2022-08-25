@@ -3,14 +3,15 @@
 </template>
 
 <script>
-import store from "./store.js";
-import * as type from "./mutationTypes/types";
+import store from "./store";
+import * as type from "./types";
 
 export default {
   methods: {
     addCounter() {
       store.dispatch({
-        type: type.increment,
+        // type: "increment",
+        type: type.Increment,
         amount: 10,
       });
     },
